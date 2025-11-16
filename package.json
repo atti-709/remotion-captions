@@ -1,0 +1,31 @@
+{
+  "name": "remotion-captions",
+  "version": "1.0.0",
+  "description": "Remotion project for generating Slovak captions in videos",
+  "scripts": {
+    "start": "remotion studio src/index.ts",
+    "build": "remotion render src/index.ts CaptionVideo out/video.mp4",
+    "upgrade": "remotion upgrade",
+    "generate-subtitles": "cd scripts/whisper-project && uv run subtitle_generator.py SHORT1_src.mp4",
+    "generate-subtitles-custom": "cd scripts/whisper-project && uv run subtitle_generator.py",
+    "generate-subtitles-en": "cd scripts/whisper-project && uv run generate_whisper_subtitles.py en"
+  },
+  "dependencies": {
+    "@remotion/bundler": "4.0.355",
+    "@remotion/captions": "4.0.355",
+    "@remotion/cli": "4.0.355",
+    "@remotion/eslint-config": "4.0.355",
+    "@remotion/google-fonts": "^4.0.375",
+    "@remotion/install-whisper-cpp": "^4.0.355",
+    "@remotion/renderer": "4.0.355",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "remotion": "4.0.355"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.25",
+    "@types/react-dom": "^18.3.7",
+    "typescript": "^5.0.0"
+  },
+  "packageManager": "npm@10.0.0"
+}
