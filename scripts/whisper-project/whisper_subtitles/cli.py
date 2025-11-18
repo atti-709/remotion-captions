@@ -49,7 +49,7 @@ Examples:
     parser.add_argument(
         "-m", "--model",
         choices=["tiny", "base", "small", "medium", "large", "large-v2", "large-v3", "turbo"],
-        default="turbo",
+        default="medium",
         help="Whisper model size (default: turbo)"
     )
 
@@ -63,7 +63,8 @@ Examples:
     parser.add_argument(
         "--translate",
         action="store_true",
-        help="Translate to English (Whisper only supports translation to English)"
+        help="Translate to English (Whisper only supports translation to English)",
+        default=False
     )
 
     # Advanced Whisper parameters
@@ -91,6 +92,34 @@ Examples:
     parser.add_argument(
         "--initial-prompt",
         help="Initial prompt to guide transcription"
+    )
+
+    # Anti-hallucination parameters
+    parser.add_argument(
+        "--condition-on-previous-text",
+        action="store_true",
+        help="Condition on previous text (can cause repetition, default: False)"
+    )
+
+    parser.add_argument(
+        "--compression-ratio-threshold",
+        type=float,
+        default=2.4,
+        help="Compression ratio threshold to detect repetitive text (default: 2.4)"
+    )
+
+    parser.add_argument(
+        "--logprob-threshold",
+        type=float,
+        default=-1.0,
+        help="Log probability threshold to detect low-confidence segments (default: -1.0)"
+    )
+
+    parser.add_argument(
+        "--no-speech-threshold",
+        type=float,
+        default=0.6,
+        help="No-speech threshold to detect silence/music (default: 0.6)"
     )
 
     # Display options
@@ -150,7 +179,12 @@ def resolve_paths(
     if output_arg:
         output_path = Path(output_arg)
         if not output_path.is_absolute():
-            output_path = project_root / "public" / output_arg
+            # If path has directory components (e.g., ../foo, dir/file), resolve from CWD
+            # Otherwise, it's just a filename - put it in project_root/public
+            if output_path.parent != Path("."):
+                output_path = output_path.resolve()
+            else:
+                output_path = project_root / "public" / output_arg
     else:
         # Default output path
         if translate:
@@ -185,7 +219,11 @@ def run_cli():
             temperature=args.temperature,
             best_of=args.best_of,
             beam_size=args.beam_size,
-            initial_prompt=args.initial_prompt
+            initial_prompt=args.initial_prompt,
+            condition_on_previous_text=args.condition_on_previous_text,
+            compression_ratio_threshold=args.compression_ratio_threshold,
+            logprob_threshold=args.logprob_threshold,
+            no_speech_threshold=args.no_speech_threshold
         )
 
         # Create generator

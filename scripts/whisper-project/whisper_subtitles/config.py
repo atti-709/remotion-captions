@@ -24,6 +24,12 @@ class WhisperConfig:
     patience: float = 1.0
     length_penalty: float = 1.0
     suppress_tokens: list[int] = field(default_factory=lambda: [-1])
+    
+    # Anti-hallucination parameters
+    condition_on_previous_text: bool = False  # Prevents repetition
+    compression_ratio_threshold: float = 2.4  # Detects repetitive text
+    logprob_threshold: float = -1.0  # Detects low-confidence segments
+    no_speech_threshold: float = 0.6  # Detects silence/music
 
     # Language-specific prompts
     initial_prompt: str | None = None
@@ -45,7 +51,11 @@ class WhisperConfig:
             'patience': self.patience,
             'length_penalty': self.length_penalty,
             'suppress_tokens': self.suppress_tokens,
-            'initial_prompt': self.initial_prompt or ""
+            'initial_prompt': self.initial_prompt or "",
+            'condition_on_previous_text': self.condition_on_previous_text,
+            'compression_ratio_threshold': self.compression_ratio_threshold,
+            'logprob_threshold': self.logprob_threshold,
+            'no_speech_threshold': self.no_speech_threshold
         }
 
 
