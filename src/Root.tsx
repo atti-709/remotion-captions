@@ -16,7 +16,7 @@ export const RemotionRoot: React.FC = () => {
           subtitle: 'Toto je ukážka slovenských titulkov',
           backgroundColor: '#1a1a1a',
           textColor: '#ffffff',
-          videoSrc: staticFile('assets/Piano.mp4'),
+          videoSrc: staticFile('assets/Guitar.mp4'),
         }}
       />
     </>
