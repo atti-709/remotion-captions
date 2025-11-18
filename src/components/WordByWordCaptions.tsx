@@ -12,7 +12,7 @@ export const WordByWordCaptions: React.FC<WordByWordCaptionsProps> = ({
   srtPath,
   fontSize = 48,
   color = '#ffffff',
-  wordsPerLine = 3,
+  wordsPerLine = 4,
   highlightColor = '#ff6b6b',
   backgroundColor = 'rgba(0, 0, 0, 0.8)',
   position = 'bottom',
@@ -27,7 +27,10 @@ export const WordByWordCaptions: React.FC<WordByWordCaptionsProps> = ({
   borderRadius = 6,
   boxShadow = '0 4px 8px rgba(0, 0, 0, 0.3)',
 }) => {
-  const { fontFamily: playfairFontFamily } = loadFont();
+  const { fontFamily: playfairFontFamily } = loadFont('normal', {
+    weights: ['400', '700'],
+    subsets: ['latin', 'latin-ext'],
+  });
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const { subtitles, loading, error } = useSubtitles(srtPath);

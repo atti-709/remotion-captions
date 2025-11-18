@@ -14,7 +14,7 @@ export const defaultCaptionStyle: CaptionStyle = {
 
 export const defaultCaptionConfig: CaptionConfig = {
   position: 'bottom',
-  wordsPerLine: 3,
+  wordsPerLine: 4,
   fadeInDuration: 0.1,
   fadeOutDuration: 0.1,
   highlightScale: 1.05,

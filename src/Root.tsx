@@ -17,6 +17,7 @@ export const RemotionRoot: React.FC = () => {
           backgroundColor: '#1a1a1a',
           textColor: '#ffffff',
           videoSrc: staticFile('assets/Guitar.mp4'),
+          srtPath: staticFile('subtitles_sk.srt'),
         }}
       />
     </>

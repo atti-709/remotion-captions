@@ -12,6 +12,7 @@ export const CaptionVideo: React.FC<CaptionVideoProps> = ({
   backgroundColor,
   textColor,
   videoSrc,
+  srtPath,
 }) => {
 
   return (
@@ -40,7 +41,7 @@ export const CaptionVideo: React.FC<CaptionVideoProps> = ({
 
       {/* Render word-by-word captions with highlighting */}
       <WordByWordCaptions
-        srtPath={staticFile('subtitles_en.srt')}
+        srtPath={srtPath}
         {...defaultCaptionStyle}
         {...defaultCaptionConfig}
         color={textColor}

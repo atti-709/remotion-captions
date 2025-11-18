@@ -4,6 +4,7 @@ export interface VideoCompositionProps {
   backgroundColor: string;
   textColor: string;
   videoSrc: string;
+  srtPath: string;
 }
 
 export interface VideoConfig {
